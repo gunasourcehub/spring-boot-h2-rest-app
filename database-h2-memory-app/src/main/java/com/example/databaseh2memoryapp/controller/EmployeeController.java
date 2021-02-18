@@ -46,6 +46,13 @@ public class EmployeeController {
 		return ResponseEntity.ok().body(employee);
 	}
 	
+	@GetMapping("/mergeMongo2H2")
+	public void mergeMongoToH2(){
+		List<EmployeeMongo> itr =  employeeMongoRepo.findAll();
+		for(EmployeeMongo employee : itr){
+			employeeRepository.save(employee);
+		}
+	}
 	@PostMapping("/employees")
 	public Employee createEmployee(@Valid @RequestBody Employee employee){
 		return employeeRepository.save(employee);
